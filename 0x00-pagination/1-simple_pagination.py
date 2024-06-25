@@ -48,14 +48,15 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """ function to get the number of pages """
-        assert page > 0 and isinstance(page, int)
-        assert isinstance(page_size, int) and page > 0
+        """ function to get the number of queries per page """
+        assert isinstance(page, int) and page > 0
+        assert isinstance(page_size, int) and page_size > 0
         page_index = index_range(page, page_size)
         result = self.dataset()
-        if page_index:
-            (start, end) = page_index
-            if start >= len(result):
-                return []
-            else:
-                return result[start: end]
+        (start, end) = page_index
+
+        queries_cap = math.ceil(len(result) / page_size)
+        if page >= queries_cap:
+            return []
+        else:
+            return result[start: end]
