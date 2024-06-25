@@ -55,7 +55,7 @@ class Server:
         result = self.dataset()
         if page_index:
             (start, end) = page_index
-            if start * end > len(result):
+            if start >= len(result):
                 return []
             else:
                 return result[start: end]
