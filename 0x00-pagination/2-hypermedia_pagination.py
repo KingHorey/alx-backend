@@ -79,6 +79,6 @@ class Server:
             'page': page,
             'data': results,
             'next_page': page + 1 if len(results) > 0 else None,
-            'prev_page': page - 1,
+            'prev_page': page - 1 if page > 1 else None,
             'total_pages': math.ceil(len(file) / page_size)
         }
