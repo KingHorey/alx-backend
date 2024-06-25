@@ -68,6 +68,7 @@ class Server:
                                                                         List
                                                                         [List]
                                                                     ]]:
+        """ return result as dict, containing further information """
         assert isinstance(page, int) and page > 0
         assert isinstance(page_size, int) and page_size > 0
 
@@ -81,4 +82,3 @@ class Server:
             'prev_page': page - 1,
             'total_pages': math.ceil(len(file) / page_size)
         }
-
