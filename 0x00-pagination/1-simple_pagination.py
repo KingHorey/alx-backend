@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
+
 """ import typing annotation assistants
     CSV to read CSV files
     Math for mathematical calculations
 """
-
 import csv
+import math
 from typing import List, Tuple
 
 
@@ -47,9 +48,9 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
+        """ function to get the number of pages """
         assert page > 0 and isinstance(page, int)
         assert isinstance(page_size, int) and page > 0
-
         page_index = index_range(page, page_size)
         result = self.dataset()
         if page_index:
