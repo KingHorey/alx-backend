@@ -1,11 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 """ BaseCaching module
 """
 from typing import Union
 
 
-class BaseCaching:
+class BaseCaching():
     """ BaseCaching defines:
       - constants of your caching system
       - where your data are stored (in a dictionary)
