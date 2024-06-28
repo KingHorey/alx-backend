@@ -4,16 +4,10 @@
     parent class BaseCaching
 """
 from base_caching import BaseCaching
-from typing import *
 
 
 class FIFOCache(BaseCaching):
-    """ implement FIFO caching technique to add to cache"""
-    def __init__(self):
-        """ init method"""
-        super().__init__()
-        """ super method"""
-
+    """ implement FIFO caching technique to add to cache """
     def put(self, key, data):
         """ add to the cache """
         if (key is not None and data is not None and len(self.cache_data) <
@@ -30,7 +24,7 @@ class FIFOCache(BaseCaching):
             del self.cache_data[dict_key]
             self.cache_data.update({key: data})
 
-    def get(self, key: str) -> Union[str, None]:
+    def get(self, key: str):
         """ return an item from the cache if it exists """
         if key is not None:
             return self.cache_data.get(key, None)
