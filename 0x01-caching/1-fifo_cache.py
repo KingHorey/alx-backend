@@ -9,7 +9,7 @@ from typing import *
 
 
 class FIFOCache(BaseCaching):
-    """ implement FIFO caching technique"""
+    """ implement FIFO caching technique to add to cache"""
     def __init__(self):
         super().__init__()
 
