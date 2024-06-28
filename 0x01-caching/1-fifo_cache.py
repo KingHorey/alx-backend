@@ -3,7 +3,6 @@
 """ import type hints
     parent class BaseCaching
 """
-
 from base_caching import BaseCaching
 from typing import *
 
@@ -11,7 +10,9 @@ from typing import *
 class FIFOCache(BaseCaching):
     """ implement FIFO caching technique to add to cache"""
     def __init__(self):
+        """ init method"""
         super().__init__()
+        """ super method"""
 
     def put(self, key, data):
         """ add to the cache """
