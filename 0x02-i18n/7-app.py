@@ -3,9 +3,11 @@
 
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, _
+import pytz
 
 
 class Config:
+    """ class for locale configs"""
     LANGUAGES = ["en", "fr"]
     DEFAULT_LOCALE = "en"
     DEFAULT_TZ = "UTC"
@@ -26,13 +28,15 @@ app.url_map.strict_slashes = False
 
 
 @app.route("/", methods=["GET"])
-def home():
+def home() -> None:
+    """ render homepage """
     render_template('1-index.html', home_title=_("Welcome to Holberton"),
                     home_header=_("Hello World"))
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
+    """ sets the locale """
     lang = request.args.get("locale")
     if lang in app.config['LANGUAGES']:
         return lang
@@ -53,6 +57,7 @@ def before_request():
 
 
 def get_user():
+    """ get user information, if exists """
     user_id = request.args.get("login_as")
     if user_id in users and int(user_id):
         return users.get(int(user_id))
@@ -62,14 +67,17 @@ def get_user():
 @babel.timezoneselector
 def get_timezone():
     """ set the timezone """
-    lang = request.args.get("locale")
-    if lang in app.config['LANGUAGES']:
-        return lang
+    tzone = request.args.get("timezone")
+    if tzone:
+        try:
+            verified_zone = pytz.timezone(tzone)
+        except pytz.exceptions.UnknownTimeZoneError:
+            return app.config['DEFAULT_TZ']
     if g.user:
-        lang = g.user.get("locale")
-        if lang in app.config['LANGUAGES']:
-            return lang
+        tzone = g.user.get("timezone")
+        try:
+            verified_zone = pytz.timezone(tzone)
+        except pytz.exceptions.UnknownTimeZoneError:
+            return app.config['DEFAULT_TZ']
     else:
-        best_match = request.accept_languages.best_match(
-            app.config['LANGUAGES'])
-        return best_match if best_match else app.config['DEFAULT_LOCALE']
+        return app.config['DEFAULT_TZ']

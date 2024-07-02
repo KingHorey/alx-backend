@@ -3,6 +3,7 @@ from flask_babel import Babel
 
 
 class Config:
+	""" class for locale configs"""
 	LANGUAGES = ["en", "fr"]
 	DEFAULT_LOCALE = "en"
 	DEFAULT_TZ = "UTC"
@@ -16,5 +17,6 @@ app.url_map.strict_slashes = False
 
 
 @app.route("/", methods=["GET"])
-def home():
+def home() -> None:
+	""" home route"""
 	render_template('1-index.html')

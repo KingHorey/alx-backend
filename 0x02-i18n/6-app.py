@@ -6,6 +6,7 @@ from flask_babel import Babel, _
 
 
 class Config:
+    """ class for locale configs"""
     LANGUAGES = ["en", "fr"]
     DEFAULT_LOCALE = "en"
     DEFAULT_TZ = "UTC"
@@ -27,12 +28,14 @@ app.url_map.strict_slashes = False
 
 @app.route("/", methods=["GET"])
 def home():
+    """ render homepage """
     render_template('1-index.html', home_title=_("Welcome to Holberton"),
                     home_header=_("Hello World"))
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
+    """ gets and sets the locale definition """
     lang = request.args.get("locale")
     if lang in app.config['LANGUAGES']:
         return lang
@@ -47,12 +50,13 @@ def get_locale():
 
 
 @app.before_request
-def before_request():
+def before_request() -> None:
     """ run before other requests """
     g.user = get_user()
 
 
-def get_user():
+def get_user() -> dict:
+    """ checks for the login id"""
     user_id = request.args.get("login_as")
     if user_id in users and int(user_id):
         return users.get(int(user_id))

@@ -7,5 +7,5 @@ app.url_map.strict_slashes = False
 
 
 @app.route("/")
-def home():
+def home() -> None:
 	render_template('0-index.html')
