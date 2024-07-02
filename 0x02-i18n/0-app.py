@@ -2,12 +2,15 @@
 
 from flask import Flask, render_template
 
+""" import flask package """
+
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 
 @app.route("/")
-def home() -> None:
+def home() -> str:
+	""" render homepage """
 	return render_template('0-index.html')
 
 
