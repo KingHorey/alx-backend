@@ -8,4 +8,8 @@ app.url_map.strict_slashes = False
 
 @app.route("/")
 def home() -> None:
-	render_template('0-index.html')
+	return render_template('0-index.html')
+
+
+if __name__ == "__main__":
+	app.run(port=5000, host="0.0.0.0")
