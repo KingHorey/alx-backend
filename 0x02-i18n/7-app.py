@@ -32,9 +32,18 @@ def home():
 
 
 @babel.localeselector
-def get_locale(locale="fr"):
-    best_match = request.accept_languages.best_match(app.config['LANGUAGES'])
-    return best_match if best_match else locale
+def get_locale():
+    lang = request.args.get("locale")
+    if lang in app.config['LANGUAGES']:
+        return lang
+    if g.user:
+        lang = g.user.get("locale")
+        if lang in app.config['LANGUAGES']:
+            return lang
+    else:
+        best_match = request.accept_languages.best_match(
+            app.config['LANGUAGES'])
+        return best_match if best_match else app.config['DEFAULT_LOCALE']
 
 
 @app.before_request
@@ -48,3 +57,19 @@ def get_user():
     if user_id in users and int(user_id):
         return users.get(int(user_id))
     return {}
+
+
+@babel.timezoneselector
+def get_timezone():
+    """ set the timezone """
+    lang = request.args.get("locale")
+    if lang in app.config['LANGUAGES']:
+        return lang
+    if g.user:
+        lang = g.user.get("locale")
+        if lang in app.config['LANGUAGES']:
+            return lang
+    else:
+        best_match = request.accept_languages.best_match(
+            app.config['LANGUAGES'])
+        return best_match if best_match else app.config['DEFAULT_LOCALE']
