@@ -19,7 +19,7 @@ app.config.from_object(Config)
 app.url_map.strict_slashes = False
 
 
-@app.route("/", methods=["GET"])
+@app.route("/")
 def home() -> str:
     """ render homepage """
     return render_template('1-index.html', home_title=_("Welcome to "

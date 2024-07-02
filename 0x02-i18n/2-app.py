@@ -20,13 +20,17 @@ app.config.from_object(Config)
 app.url_map.strict_slashes = False
 
 
-@app.route("/", methods=["GET"])
-def home() -> None:
+@app.route("/")
+def home() -> str:
     """ render homepage """
-    render_template('1-index.html')
+    return render_template('1-index.html')
 
 
 @babel.localeselector
 def get_locale() -> str:
     """ sets locale """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+
+if __name__ == "__main__":
+    app.run(port=5000, host="0.0.0.0")
