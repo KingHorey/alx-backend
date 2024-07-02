@@ -23,7 +23,7 @@ app.url_map.strict_slashes = False
 @app.route("/", methods=["GET"])
 def home() -> None:
     """ render homepage """
-    render_template('1-index.html', )
+    render_template('1-index.html')
 
 
 @babel.localeselector

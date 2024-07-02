@@ -32,7 +32,7 @@ app.url_map.strict_slashes = False
 def home() -> None:
     """ render homepage """
     render_template('1-index.html', home_title=_("Welcome to Holberton"),
-                    home_header=_("Hello World"))
+                    home_header=_("Hello world"))
 
 
 @babel.localeselector
