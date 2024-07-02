@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+
+""" import flask packages """
+
 from flask import Flask, render_template, request
 from flask_babel import Babel, _
 
@@ -26,4 +30,3 @@ def home() -> None:
 def get_locale() -> str:
     """ sets locale """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
-

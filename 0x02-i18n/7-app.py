@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """ Module for trying out Babel i18n """
+from typing import Any
 
+import pytz
 from flask import Flask, render_template, request, g
 from flask_babel import Babel, _
-import pytz
 
 
 class Config:
@@ -51,12 +52,12 @@ def get_locale() -> str:
 
 
 @app.before_request
-def before_request():
+def before_request() -> None:
     """ run before other requests """
     g.user = get_user()
 
 
-def get_user():
+def get_user() -> dict:
     """ get user information, if exists """
     user_id = request.args.get("login_as")
     if user_id in users and int(user_id):
@@ -65,19 +66,25 @@ def get_user():
 
 
 @babel.timezoneselector
-def get_timezone():
+def get_timezone() -> Any:
     """ set the timezone """
     tzone = request.args.get("timezone")
     if tzone:
         try:
             verified_zone = pytz.timezone(tzone)
+            return verified_zone
         except pytz.exceptions.UnknownTimeZoneError:
             return app.config['DEFAULT_TZ']
     if g.user:
         tzone = g.user.get("timezone")
         try:
             verified_zone = pytz.timezone(tzone)
+            return verified_zone
         except pytz.exceptions.UnknownTimeZoneError:
             return app.config['DEFAULT_TZ']
     else:
         return app.config['DEFAULT_TZ']
+
+
+if __name__ == "__main__":
+    app.run(port=5000, host="0.0.0.0")

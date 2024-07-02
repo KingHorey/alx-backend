@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+
+""" import flask and flask_babel """
+
 from flask import Flask, render_template
 from flask_babel import Babel
 
@@ -17,6 +21,10 @@ app.url_map.strict_slashes = False
 
 
 @app.route("/", methods=["GET"])
-def home() -> None:
+def home() -> str:
 	""" home route"""
-	render_template('1-index.html')
+	return render_template('1-index.html')
+
+
+if __name__ == "__main__":
+	app.run(port=5000, host="0.0.0.0")

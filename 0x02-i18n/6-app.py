@@ -27,10 +27,11 @@ app.url_map.strict_slashes = False
 
 
 @app.route("/", methods=["GET"])
-def home():
+def home() -> str:
     """ render homepage """
-    render_template('1-index.html', home_title=_("Welcome to Holberton"),
-                    home_header=_("Hello World"))
+    return render_template('1-index.html', home_title=_("Welcome to "
+                                                        "Holberton"),
+                           home_header=_("Hello World"))
 
 
 @babel.localeselector
@@ -61,3 +62,7 @@ def get_user() -> dict:
     if user_id in users and int(user_id):
         return users.get(int(user_id))
     return {}
+
+
+if __name__ == "__main__":
+    app.run(port=5000, host="0.0.0.0")
