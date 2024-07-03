@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 
 """ import flask packages """
+from typing import Any
+
 from flask import Flask, render_template, request
-from flask_babel import Babel, _
+from flask_babel import Babel, gettext
 
 
 class Config:
     """ class for locale configs"""
     LANGUAGES = ["en", "fr"]
-    DEFAULT_LOCALE = "en"
-    DEFAULT_TZ = "UTC"
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TZ = "UTC"
 
 
 app = Flask(__name__)
@@ -22,16 +24,16 @@ app.url_map.strict_slashes = False
 @app.route("/")
 def home() -> str:
     """ render homepage """
-    return render_template('1-index.html', home_title=_("Welcome to "
-                                                        "Holberton"),
-                           home_header=_("Hello world"))
+    return render_template('1-index.html', home_title=gettext("Welcome to "
+                                                              "Holberton"),
+                           home_header=gettext("Hello world!"))
 
 
 @babel.localeselector
-def get_locale() -> str:
+def get_locale() -> Any:
     """ sets the locale """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 if __name__ == "__main__":
-    app.run(port=5000, host="0.0.0.0")
+    app.run()
