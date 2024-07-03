@@ -24,7 +24,7 @@ app.url_map.strict_slashes = False
 @app.route("/")
 def home() -> str:
     """ render homepage """
-    return render_template('1-index.html', home_title=gettext("Welcome to "
+    return render_template('3-index.html', home_title=gettext("Welcome to "
                                                               "Holberton"),
                            home_header=gettext("Hello world!"))
 
