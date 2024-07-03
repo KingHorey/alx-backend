@@ -2,7 +2,6 @@
 
 """ import flask packages """
 from typing import Any
-
 from flask import Flask, render_template, request
 from flask_babel import Babel, gettext
 
@@ -15,7 +14,7 @@ class Config:
 
 
 app = Flask(__name__)
-babel = Babel(app)
+
 
 app.config.from_object(Config)
 app.url_map.strict_slashes = False
@@ -29,10 +28,13 @@ def home() -> str:
                            home_header=gettext("Hello world!"))
 
 
-@babel.localeselector
 def get_locale() -> Any:
     """ sets the locale """
+    print(request.accept_languages.best_match(app.config['LANGUAGES']))
     return request.accept_languages.best_match(app.config['LANGUAGES'])
+
+
+babel = Babel(app, locale_selector=get_locale)
 
 
 if __name__ == "__main__":
