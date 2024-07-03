@@ -3,7 +3,7 @@
 """ import flask packages to be used """
 from typing import Any
 from flask import Flask, render_template, request
-from flask_babel import Babel, gettext
+from flask_babel import Babel, gettext as txt
 
 
 class Config:
@@ -22,9 +22,9 @@ app.config.from_object(Config)
 @app.route("/")
 def home() -> str:
     """ render homepage """
-    return render_template('3-index.html', home_title=gettext("Welcome to "
-                                                              "Holberton"),
-                           home_header=gettext("Hello world!"))
+    return render_template('3-index.html', home_title=txt("Welcome to "
+                                                          "Holberton"),
+                           home_header=txt("Hello world!"))
 
 
 @babel.localeselector
