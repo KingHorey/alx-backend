@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """ import flask packages """
-from typing import Callable
+from typing import Callable, Any
 from flask import Flask, render_template, request
 from flask_babel import Babel
 
@@ -26,7 +26,7 @@ def home() -> Callable:
 
 
 @babel.localeselector
-def get_locale() -> str:
+def get_locale() -> Any:
     """ sets locale """
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
