@@ -4,13 +4,14 @@
 
 from flask import Flask, render_template
 from flask_babel import Babel
+from typing import Callable
 
 
 class Config:
     """ class for locale configs"""
     LANGUAGES = ["en", "fr"]
-    DEFAULT_LOCALE = "en"
-    DEFAULT_TZ = "UTC"
+    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
 app = Flask(__name__)
@@ -21,10 +22,10 @@ app.url_map.strict_slashes = False
 
 
 @app.route("/")
-def home() -> str:
+def home() -> Callable:
     """ home route"""
     return render_template('1-index.html')
 
 
 if __name__ == "__main__":
-    app.run(port=5000, host="0.0.0.0")
+    app.run()
