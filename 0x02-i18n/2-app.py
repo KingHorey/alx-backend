@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
 """ import flask packages """
-
+from typing import Callable
 from flask import Flask, render_template, request
-from flask_babel import Babel, _
+from flask_babel import Babel
 
 
 class Config:
@@ -20,7 +20,7 @@ app.config.from_object(Config)
 
 
 @app.route("/")
-def home() -> str:
+def home() -> Callable:
     """ render homepage """
     return render_template('1-index.html')
 
