@@ -19,11 +19,11 @@ msgstr ""
 
 #: 3-app.py:27
 msgid "home_title"
-msgstr "Welcome to Holberton"
+msgstr ""
 
 #: 3-app.py:29
 msgid "home_header"
-msgstr "Hello world!"
+msgstr ""
 
 #: flask_babel_env/lib/python3.12/site-packages/click/_termui_impl.py:518
 msgid "{editor}: Editing failed"
